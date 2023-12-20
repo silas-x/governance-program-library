@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Rust
-        run: rustup toolchain install ${{ env.RUST_TOOLCHAIN }}
+        run: rustup toolchain install ${{ env.RUST_TOOLCHAIN }} --component clippy, rustfmt
 
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
@@ -73,6 +73,5 @@ jobs:
       #   run: cargo +bpf test-bpf
       - name: Build
         run: |
-          cargo build-sbf --features enable-gpl || true
-          cargo +solana build-sbf --features enable-gpl
-          
+          cargo build-sbf || true
+          cargo +solana build-sbf
