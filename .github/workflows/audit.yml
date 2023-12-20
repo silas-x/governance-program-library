@@ -10,7 +10,8 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  SOLANA_VERSION: '1.14.16'
+  SOLANA_VERSION: '1.16.23'
+  RUST_TOOLCHAIN: '1.68.0'
 
 jobs:
   build:
@@ -20,20 +21,13 @@ jobs:
       - name: Check-out repo
         uses: actions/checkout@v3
 
-      - name: Cache Solana binaries
-        uses: actions/cache@v3
-        id: solana-cache
-        with:
-          path: |
-            ~/.cache/solana
-            ~/.local/share/solana
-            ~/.rustup
-          key: solana-${{ env.SOLANA_VERSION }}
-
       - name: Cache build dependencies
         uses: Swatinem/rust-cache@v2
         with:
           cache-directories: .coderrect/build
+      
+      - name: Install Rust toolchain
+        run: rustup toolchain install ${{ env.RUST_TOOLCHAIN }}
 
       - name: Install Solana
         run: |
