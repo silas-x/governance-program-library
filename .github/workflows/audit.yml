@@ -39,7 +39,7 @@ jobs:
 
       - name: Install bpf
         run: |
-          (cd ${{ github.workspace }}/scripts; ./install-bpf.sh)
+          (cd ${{ github.workspace }}/.github/scripts; ./install-bpf.sh)
 
       - name: Install Soteria
         run: |
