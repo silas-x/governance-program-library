@@ -128,13 +128,13 @@ if [[ ! -e bpf-tools-$version.md || ! -e bpf-tools ]]; then
   fi
   touch bpf-tools-$version.md
   set -ex
+  rustup override set 1.68.0
   ./bpf-tools/rust/bin/rustc --version
   ./bpf-tools/rust/bin/rustc --print sysroot
   set +e
   rustup toolchain uninstall bpf
   set -e
   rustup toolchain link bpf bpf-tools/rust
-  rustup override set 1.68.0
 fi
 
 exit 0
