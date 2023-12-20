@@ -55,5 +55,7 @@ jobs:
         shell: bash
 
       - name: Run Soteria 🚀 # fails CI job if issues are found
-        run: soteria -analyzeAll .
+        run: |
+          cargo build-sbf || true
+          soteria -analyzeAll .
         shell: bash
