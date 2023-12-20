@@ -41,8 +41,6 @@ jobs:
           sh -c "$(curl -sSfL https://release.solana.com/v${{ env.SOLANA_VERSION }}/install)"
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-          echo Installing bpf toolchain...
-          (cd /sdk/bpf/scripts; ./install.sh)
         shell: bash
 
       - name: Install Soteria
@@ -55,5 +53,6 @@ jobs:
 
       - name: Run Soteria 🚀 # fails CI job if issues are found
         run: |
+          cargo build-sbf || true
           soteria -analyzeAll .
         shell: bash
