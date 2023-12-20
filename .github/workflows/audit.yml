@@ -10,7 +10,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  SOLANA_VERSION: '1.16.23'
+  SOLANA_VERSION: '1.14.16'
 
 jobs:
   build:
@@ -41,6 +41,8 @@ jobs:
           sh -c "$(curl -sSfL https://release.solana.com/v${{ env.SOLANA_VERSION }}/install)"
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          echo Installing bpf toolchain...
+          (cd /home/runner/.local/share/solana/install/active_release/bin/sdk/bpf/scripts; ./install.sh)
         shell: bash
 
       - name: Install Soteria
@@ -52,7 +54,5 @@ jobs:
         shell: bash
 
       - name: Run Soteria 🚀 # fails CI job if issues are found
-        run: |
-          cargo build-bpf || true
-          soteria -analyzeAll .
+        run: soteria -analyzeAll .
         shell: bash
