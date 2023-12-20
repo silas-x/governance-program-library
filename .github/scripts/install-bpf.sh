@@ -118,7 +118,7 @@ if [[ ! -e bpf-tools-$version.md || ! -e bpf-tools ]]; then
     job="download \
            https://github.com/solana-labs/platform-tools/releases/download \
            $version \
-           solana-bpf-tools-${machine}.bz2 \
+           solana-bpf-tools-${machine}.tar.bz2 \
            bpf-tools"
     get $version bpf-tools "$job"
   )
