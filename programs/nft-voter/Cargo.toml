@@ -34,5 +34,5 @@ toml_datetime = "=0.6.1"
 
 [dev-dependencies]
 borsh = "0.9.1"
-solana-sdk = "1.14.16"
-solana-program-test = "1.14.16"
+solana-sdk = "1.17.12"
+solana-program-test = "1.17.12"

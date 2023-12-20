@@ -42,7 +42,7 @@ jobs:
       - name: Run clippy
         run: cargo clippy -- --deny=warnings
 
-  test:
+  unit-test:
     name: Run Tests
     runs-on: ubuntu-latest
     steps:
@@ -73,20 +73,16 @@ jobs:
           echo Generating keypair...
           solana-keygen new -o "$HOME/.config/solana/id.json" --no-passphrase --silent
 
-      # - name: Install BPF tools
-      #   # Note: as a workaround for cargo build-bpf issue run it and ignore errors to install the BPF tools
-      #   # https://github.com/solana-labs/solana/issues/26583
-      #   run: cargo build-bpf || true
-
-      # - name: Build dependencies
-      #   run: cargo +bpf build-bpf
-
-      # - name: Run bpf tests
-      #   run: cargo +bpf test-bpf
       - name: Build
         run: |
           cargo build-sbf || true
           cargo +solana build-sbf
       
-      - name: Run tests
+      - name: Run unit tests
         run: cargo +solana test-sbf
+  
+  tests:
+     name: Run Tests
+     runs-on: ubuntu-latest
+     steps:
+      - uses: actions/checkout@v3
