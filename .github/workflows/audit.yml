@@ -33,7 +33,7 @@ jobs:
       - name: Cache build dependencies
         uses: Swatinem/rust-cache@v2
         with:
-          target-dir: .coderrect/build
+          cache-directories: .coderrect/build
 
       - name: Install Solana
         run: |
@@ -53,6 +53,6 @@ jobs:
 
       - name: Run Soteria 🚀 # fails CI job if issues are found
         run: |
-          cargo build-sbf || true
+          cargo build-bpf || true
           soteria -analyzeAll .
         shell: bash
