@@ -2,9 +2,11 @@ name: Lint and Test
 
 on:
   push:
-    branches: master
+    branches:
+      - master
   pull_request:
-    branches: master
+    branches:
+      - master
 
 env:
   CARGO_TERM_COLOR: always
@@ -19,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Rust
-        run: rustup toolchain install ${{ env.RUST_TOOLCHAIN }} --component clippy, rustfmt
+        run: rustup toolchain install ${{ env.RUST_TOOLCHAIN }} --component clippy
 
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
